@@ -3,12 +3,14 @@
   import Text from './lib/Text.svelte'
 
   let height = 0;
-  let scrolled = spring(0);
+  let scrolled = spring(window.pageYOffset || window.scrollTop || 0, {
+    stiffness: 0.05,
+    // damping: 0.25
+  });
 
   $: document.body.style.height = `${height}px`
 
   const handleScroll = (e) => {
-    console.log(e)
     scrolled.set(window.pageYOffset || window.scrollTop || 0)
   }
 </script>
